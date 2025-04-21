@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://caw8j4i8qrcu"]
+
+[ext_resource type="PackedScene" uid="uid://diyyxtfptjo7x" path="res://example/ExamplePlayer.tscn" id="1_g8eb1"]
+[ext_resource type="Script" uid="uid://dku77viqwklks" path="res://addons/analog_touch_control/scripts/TouchAnalog.gd" id="2_6tbif"]
+
+[node name="ExampleScene" type="Node2D"]
+
+[node name="ExamplePlayer" parent="." instance=ExtResource("1_g8eb1")]
+position = Vector2(583, 276)
+
+[node name="TouchAnalog" type="Node2D" parent="."]
+script = ExtResource("2_6tbif")
+PositionType = 1
+UpInput = "ui_up"
+DownInput = "ui_down"
+LeftInput = "ui_left"
+RightInput = "ui_right"
+metadata/_custom_type_script = "uid://dku77viqwklks"

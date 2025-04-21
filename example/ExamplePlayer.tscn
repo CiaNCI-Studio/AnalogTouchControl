@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://diyyxtfptjo7x"]
+
+[sub_resource type="GDScript" id="GDScript_yrygc"]
+script/source = "extends CharacterBody2D
+
+const SPEED = 300.0
+
+func _physics_process(delta: float) -> void:	
+	var direction := Input.get_vector(\"ui_left\", \"ui_right\", \"ui_up\", \"ui_down\")	
+	if direction:
+		velocity = direction * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.y = move_toward(velocity.y, 0, SPEED)
+
+	var currentRotation = rotation
+	look_at(global_position + direction)
+	var targetRotation = rotation
+	rotation = lerp_angle(currentRotation, targetRotation, 10 * delta)
+		
+	move_and_slide()
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yrygc"]
+radius = 14.0357
+
+[sub_resource type="SphereMesh" id="SphereMesh_yrygc"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_7a2lp"]
+
+[node name="ExamplePlayer" type="CharacterBody2D"]
+script = SubResource("GDScript_yrygc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_yrygc")
+
+[node name="Geometry" type="MeshInstance2D" parent="."]
+position = Vector2(0, 3.8147e-06)
+rotation = 1.5708
+scale = Vector2(28.0317, 28.0318)
+mesh = SubResource("SphereMesh_yrygc")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Geometry"]
+position = Vector2(-2.98023e-08, -0.535108)
+scale = Vector2(0.357143, 0.357143)
+mesh = SubResource("SphereMesh_7a2lp")
